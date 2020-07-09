@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  puppeteer: threetreeslight/puppeteer@0.1.2
 jobs:
   test:
     docker:
@@ -16,7 +18,8 @@ jobs:
             - ./node_modules
       - run:
           name: "Run tests"
-          command: yarn run test-e2e
+          working_directory: packages/test
+          command: ./node_modules/.bin/jest --maxWorkers=2
 
 workflows:
   version: 2
