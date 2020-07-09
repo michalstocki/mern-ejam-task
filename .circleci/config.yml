@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  puppeteer: threetreeslight/puppeteer@0.1.1
+  puppeteer: threetreeslight/puppeteer@0.1.2
 jobs:
   test:
     docker:
@@ -8,6 +8,11 @@ jobs:
     steps:
       - checkout
       - puppeteer/install
+      - run:
+          name: "Remove pre-installed puppeteer"
+          command: |
+            rm -rf ./node_modules/
+            rm package-lock.json
       - restore_cache:
           key: yarn-deps-{{ checksum "yarn.lock" }}
       - run:
