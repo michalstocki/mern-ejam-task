@@ -1,0 +1,24 @@
+{
+  "name": "mern-ejam-task-test",
+  "version": "1.0.0",
+  "description": "E2E test package",
+  "main": "index.js",
+  "repository": "https://github.com/michalstocki/mern-ejam-task.git",
+  "author": "Michał Stocki",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "jest"
+  },
+  "dependencies": {
+    "jest": "^26.1.0",
+    "puppeteer": "^5.0.0",
+    "ts-jest": "^26.1.1",
+    "tslib": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.4",
+    "@types/puppeteer": "^3.0.1",
+    "typescript": "^3.9.6"
+  }
+}

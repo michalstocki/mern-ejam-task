@@ -5,12 +5,13 @@
   "description": "Playground project for MERN stack",
   "main": "packages/backend/index.js",
   "repository": "https://github.com/michalstocki/mern-ejam-task.git",
-  "author": "Michał Stocki <michal.m.stocki@gmail.com>",
+  "author": "Michał Stocki",
   "license": "MIT",
   "scripts": {
     "start": "node packages/backend/index.js"
   },
   "workspaces": [
-    "packages/backend"
+    "packages/backend",
+    "packages/test"
   ]
 }
