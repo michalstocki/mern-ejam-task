@@ -1,0 +1,20 @@
+version: 2.1
+jobs:
+  test:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - restore_cache:
+          key: yarn-deps-{{ checksum "yarn.lock" }}
+      - run:
+          name: "Install dependencies"
+          command: yarn
+      - save_cache:
+          key: yarn-deps-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: "Run tests"
+          command: yarn run test-e2e
+
