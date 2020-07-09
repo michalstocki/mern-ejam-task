@@ -7,6 +7,7 @@ jobs:
       - image: circleci/node:12
     steps:
       - checkout
+      - puppeteer/install
       - restore_cache:
           key: yarn-deps-{{ checksum "yarn.lock" }}
       - run:
