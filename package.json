@@ -7,6 +7,9 @@
   "repository": "https://github.com/michalstocki/mern-ejam-task.git",
   "author": "Michał Stocki <michal.m.stocki@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "node packages/backend/index.js"
+  },
   "workspaces": [
     "packages/backend"
   ]

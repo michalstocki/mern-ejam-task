@@ -1,0 +1,8 @@
+{
+  "name": "MERN eJam task",
+  "description": "Playground project for MERN stack",
+  "repository": "https://github.com/michalstocki/mern-ejam-task.git",
+  "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
+  "keywords": ["node", "express", "heroku", "mongodb", ""],
+  "image": "heroku/nodejs"
+}
