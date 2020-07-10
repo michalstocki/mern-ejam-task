@@ -9,6 +9,6 @@ describe('displaysApplicationHeader', () => {
       (el) => el.innerHTML
     );
 
-    expect(headerContent).toEqual('Getting Started on Heroku with Node.js');
+    expect(headerContent).toEqual('Deployments');
   });
 });
