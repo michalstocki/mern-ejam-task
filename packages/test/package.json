@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "jest"
+    "start": "jest --silent --verbose"
   },
   "dependencies": {
     "jest": "^26.1.0",
