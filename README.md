@@ -12,10 +12,10 @@ Make sure you have [Node.js](http://nodejs.org/) and [Yarn](https://yarnpkg.com/
 yarn
 ```
 
-2. Compile code
+2. Build code
 
 ```sh
-yarn run compile
+yarn run build
 
 ```
 

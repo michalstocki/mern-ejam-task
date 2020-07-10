@@ -12,6 +12,7 @@
     "test-e2e": "cd packages/test && yarn start",
     "test-backend": "cd packages/backend && yarn test",
     "compile": "tsc",
+    "build": "yarn run compile",
     "check": "prettier --check ."
   },
   "workspaces": [
