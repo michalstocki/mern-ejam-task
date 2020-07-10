@@ -23,8 +23,8 @@ jobs:
           paths:
             - ./node_modules
       - run:
-          name: 'Compile'
-          command: yarn run compile
+          name: 'Build'
+          command: yarn run build
       - run:
           name: 'Check style'
           command: yarn run check
