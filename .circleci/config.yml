@@ -6,8 +6,6 @@ jobs:
     docker:
       - image: circleci/node:12
       - image: mongo:3.6
-        ports:
-          - 27017:27017
     steps:
       - checkout
       - puppeteer/install
