@@ -23,13 +23,16 @@ jobs:
           paths:
             - ./node_modules
       - run:
+          name: "Compile"
+          command: yarn run compile
+      - run:
           name: "Run Backend tests"
           working_directory: packages/backend
-          command: ./node_modules/.bin/jest --maxWorkers=2
+          command: yarn run test --maxWorkers=2
       - run:
           name: "Run E2E tests"
           working_directory: packages/test
-          command: ./node_modules/.bin/jest --maxWorkers=2 --silent --verbose
+          command: yarn run test --maxWorkers=2
 
 workflows:
   version: 2
