@@ -12,11 +12,12 @@
     "test-e2e": "cd packages/test && yarn start",
     "test-backend": "cd packages/backend && yarn test",
     "compile": "tsc",
-    "build": "yarn run compile",
+    "build": "yarn run compile && cd packages/frontend && yarn run build",
     "check": "prettier --check ."
   },
   "workspaces": [
     "packages/backend",
-    "packages/test"
+    "packages/test",
+    "packages/frontend"
   ]
 }

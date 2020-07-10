@@ -21,7 +21,8 @@
     "jest": "^26.1.0",
     "prettier": "2.0.5",
     "supertest": "^4.0.2",
-    "ts-jest": "^26.1.1"
+    "ts-jest": "^26.1.1",
+    "typescript": "^3.9.6"
   },
   "repository": {
     "type": "git",

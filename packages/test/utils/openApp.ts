@@ -1,7 +1,7 @@
 import puppeteer, { Browser, LaunchOptions, Page } from 'puppeteer';
 
 const APP_URL: string = 'http://127.0.0.1:5000';
-const APP_READY_SELECTOR: string = '.jumbotron';
+const APP_READY_SELECTOR: string = '.App';
 
 const debugOptions: LaunchOptions = {
   headless: false,

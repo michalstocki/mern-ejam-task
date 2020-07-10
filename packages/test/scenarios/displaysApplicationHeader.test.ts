@@ -5,7 +5,7 @@ describe('displaysApplicationHeader', () => {
 
   it('renders the application header text correctly', async () => {
     const headerContent: string = await page().$eval(
-      '.jumbotron .container h1',
+      '.App .App-header h1',
       (el) => el.innerHTML
     );
 

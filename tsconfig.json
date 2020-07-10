@@ -1,4 +1,5 @@
 {
+  "exclude": ["packages/frontend"],
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
