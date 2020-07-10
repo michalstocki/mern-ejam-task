@@ -33,6 +33,10 @@ jobs:
           working_directory: packages/backend
           command: yarn run test --maxWorkers=2
       - run:
+          name: 'Run Frontend tests'
+          working_directory: packages/frontend
+          command: yarn run test
+      - run:
           name: 'Run E2E tests'
           working_directory: packages/test
           command: yarn run test --maxWorkers=2
