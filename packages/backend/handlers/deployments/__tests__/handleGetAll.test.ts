@@ -1,33 +1,42 @@
 import request from 'supertest';
-import { createServer } from '../../../createServer';
+import { createTestEnv } from '../../../testUtils/createTestEnv';
 import { DeploymentJSON } from '../../../types/deployments/Deployment';
+import { deploymentsCollection } from './__fixtures__/deploymentsCollection';
 
 describe('handleGetAll', () => {
-  it('returns all deployments as JSON', async () => {
+  const { app } = createTestEnv(deploymentsCollection);
+
+  it('returns all deployments as JSON sorted newest deploys first', async () => {
     const expectedDeploys: DeploymentJSON[] = [
       {
-        deployedAt: new Date(2020, 3, 15).toJSON(),
-        templateName: 'Natural One',
-        url: 'https://naturalone.heroku.com/apps/mern-ejam-task',
-        version: '2.0.0',
+        _id: expect.any(String),
+        deployedAt: new Date(2020, 7, 10).toJSON(),
+        templateName: 'Techno 01',
+        url: 'https://techno01.heroku.com/apps/mern-ejam-task',
+        version: '1.1.1',
       },
       {
+        _id: expect.any(String),
         deployedAt: new Date(2020, 7, 9).toJSON(),
         templateName: 'Techno 01',
         url: 'https://techno01.heroku.com/apps/mern-ejam-task',
         version: '1.0.0',
       },
       {
-        deployedAt: new Date(2020, 7, 10).toJSON(),
-        templateName: 'Techno 01',
-        url: 'https://techno01.heroku.com/apps/mern-ejam-task',
-        version: '1.1.1',
+        _id: expect.any(String),
+        deployedAt: new Date(2020, 3, 15).toJSON(),
+        templateName: 'Natural One',
+        url: 'https://naturalone.heroku.com/apps/mern-ejam-task',
+        version: '2.0.0',
       },
     ];
 
-    await request(createServer())
+    await request(app())
       .get('/deployments')
       .expect('Content-Type', /json/)
-      .expect(200, expectedDeploys);
+      .expect(200)
+      .expect((resp) => {
+        expect(resp.body).toEqual(expectedDeploys);
+      });
   });
 });

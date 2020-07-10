@@ -13,7 +13,8 @@
     "test-backend": "cd packages/backend && yarn test",
     "compile": "tsc",
     "build": "yarn run compile && cd packages/frontend && yarn run build",
-    "check": "prettier --check ."
+    "check": "prettier --check .",
+    "start-mongo-local": "cd packages/backend && docker-compose up -d"
   },
   "workspaces": [
     "packages/backend",

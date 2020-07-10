@@ -10,4 +10,5 @@ export interface Deployment extends DeploymentBase {
 
 export interface DeploymentJSON extends DeploymentBase {
   deployedAt: string;
+  _id?:string;
 }
