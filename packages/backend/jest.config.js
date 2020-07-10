@@ -1,9 +1,5 @@
 module.exports = {
-  moduleFileExtensions: [
-    'ts',
-    'js',
-    'json',
-  ],
+  moduleFileExtensions: ['ts', 'js', 'json'],
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },

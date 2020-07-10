@@ -11,7 +11,8 @@
     "start": "node packages/backend/index.js",
     "test-e2e": "cd packages/test && yarn start",
     "test-backend": "cd packages/backend && yarn test",
-    "compile": "tsc"
+    "compile": "tsc",
+    "check": "prettier --check ."
   },
   "workspaces": [
     "packages/backend",

@@ -1,22 +1,21 @@
 import puppeteer, { Browser, LaunchOptions, Page } from 'puppeteer';
 
-const APP_URL:string = 'http://127.0.0.1:5000';
-const APP_READY_SELECTOR:string = '.jumbotron';
+const APP_URL: string = 'http://127.0.0.1:5000';
+const APP_READY_SELECTOR: string = '.jumbotron';
 
-const debugOptions:LaunchOptions = {
+const debugOptions: LaunchOptions = {
   headless: false,
   slowMo: 20,
 };
 
-export function openApp({ debug = false } = {}):TestEnvironment {
-
-  let browser:Browser;
-  let page:Page;
+export function openApp({ debug = false } = {}): TestEnvironment {
+  let browser: Browser;
+  let page: Page;
 
   beforeAll(async () => {
-    const options:LaunchOptions = debug ? debugOptions : {};
+    const options: LaunchOptions = debug ? debugOptions : {};
     browser = await puppeteer.launch(options);
-    const pages:Page[] = await browser.pages();
+    const pages: Page[] = await browser.pages();
     page = pages[0];
     await page.goto(APP_URL);
     await page.waitForSelector(APP_READY_SELECTOR);
@@ -32,5 +31,5 @@ export function openApp({ debug = false } = {}):TestEnvironment {
 }
 
 export interface TestEnvironment {
-  page():Page;
+  page(): Page;
 }
