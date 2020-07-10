@@ -1,6 +1,6 @@
 import defaults from 'lodash.defaults';
 
-const localDatabaseName:string = 'mern-ejam-task';
+const localDatabaseName: string = 'mern-ejam-task';
 
 const defaultConfigValues: Partial<Config> = {
   mongoURI: process.env.MONGODB_URI,
@@ -17,8 +17,8 @@ export interface Config {
   mongoURI: string;
 }
 
-export const config:Config = defaults(
+export const config: Config = defaults(
   {},
   defaultConfigValues,
-  fallbackConfigValues,
+  fallbackConfigValues
 );
