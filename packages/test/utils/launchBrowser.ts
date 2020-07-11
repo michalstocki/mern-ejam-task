@@ -1,0 +1,24 @@
+import puppeteer, { Browser, LaunchOptions, Page } from 'puppeteer';
+import { e2eTestAppConfig } from '../config';
+
+const APP_URL: string = `http://127.0.0.1:${e2eTestAppConfig.port}`;
+const APP_READY_SELECTOR: string = '.App';
+
+const debugOptions: LaunchOptions = {
+  headless: false,
+  slowMo: 20,
+};
+
+export async function launchBrowser(
+  debug: boolean
+): Promise<{ browser: Browser; page: Page }> {
+  const options: LaunchOptions = debug ? debugOptions : {};
+  const browser: Browser = await puppeteer.launch(options);
+  const pages: Page[] = await browser.pages();
+  const page: Page = pages[0];
+
+  await page.goto(APP_URL);
+  await page.waitForSelector(APP_READY_SELECTOR);
+
+  return { browser, page };
+}
