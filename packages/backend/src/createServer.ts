@@ -8,7 +8,7 @@ export async function createServer(config: Config): Promise<Express> {
   await connectMongo(config);
 
   return express()
-    .use(express.static(path.join(__dirname, '..', 'frontend', 'build')))
+    .use(express.static(path.join(__dirname, '..', '..', 'frontend', 'build')))
     .get('/deployments', (req: Request, res: Response) =>
       handleGetAll(req, res)
     );

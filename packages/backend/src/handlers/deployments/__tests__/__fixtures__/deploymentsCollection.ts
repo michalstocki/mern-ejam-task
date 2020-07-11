@@ -1,5 +1,5 @@
+import { MongoFixture } from '../../../../../testUtils/MongoFixture';
 import { DeploymentSchema } from '../../../../dataAccess/deployments/DeploymentSchema';
-import { MongoFixture } from '../../../../testUtils/MongoFixture';
 import { Deployment } from '../../../../types/deployments/Deployment';
 
 const modelName = 'Deployment';

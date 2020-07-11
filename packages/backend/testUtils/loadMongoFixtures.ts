@@ -1,6 +1,6 @@
 import mongoose, { Document, Model } from 'mongoose';
-import { Config } from '../config';
-import { connectMongo } from '../dataAccess/connectMongo';
+import { Config } from '../src/config';
+import { connectMongo } from '../src/dataAccess/connectMongo';
 import { MongoFixture } from './MongoFixture';
 
 export async function loadMongoFixtures(

@@ -8,8 +8,8 @@
   "author": "Michał Stocki",
   "license": "MIT",
   "scripts": {
-    "start": "node packages/backend/index.js",
-    "test-e2e": "cd packages/test && yarn start",
+    "start": "node packages/backend/src/index.js",
+    "test-e2e": "cd packages/test && yarn test",
     "test-backend": "cd packages/backend && yarn test",
     "compile": "tsc",
     "build": "yarn run compile && cd packages/frontend && yarn run build",
