@@ -1,7 +1,7 @@
 import { Express } from 'express';
 import { Server } from 'http';
 import mongoose, { Schema } from 'mongoose';
-import { Config } from '../src/config';
+import { Config } from '../config';
 import { createServer } from '../src/createServer';
 import { closeServer } from './closeServer';
 import { getJestWorkerId } from './getJestWorkerId';

@@ -1,5 +1,5 @@
 import mongoose, { Document, Model } from 'mongoose';
-import { Config } from '../src/config';
+import { Config } from '../config';
 import { connectMongo } from '../src/dataAccess/connectMongo';
 import { MongoFixture } from './MongoFixture';
 

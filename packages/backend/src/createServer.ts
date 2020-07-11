@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import path from 'path';
-import { Config } from './config';
+import { Config } from '../config';
 import { connectMongo } from './dataAccess/connectMongo';
 import { handleGetAll } from './handlers/deployments/handleGetAll';
 
