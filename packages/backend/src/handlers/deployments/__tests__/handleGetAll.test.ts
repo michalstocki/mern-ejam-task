@@ -10,21 +10,21 @@ describe('handleGetAll', () => {
     const expectedDeploys: DeploymentJSON[] = [
       {
         _id: expect.any(String),
-        deployedAt: new Date(2020, 7, 10).toJSON(),
+        deployedAt: new Date(2020, 7, 10, 22, 54, 12).toJSON(),
         templateName: 'Techno 01',
         url: 'https://techno01.heroku.com/apps/mern-ejam-task',
         version: '1.1.1',
       },
       {
         _id: expect.any(String),
-        deployedAt: new Date(2020, 7, 9).toJSON(),
+        deployedAt: new Date(2020, 7, 9, 22, 44, 12).toJSON(),
         templateName: 'Techno 01',
         url: 'https://techno01.heroku.com/apps/mern-ejam-task',
         version: '1.0.0',
       },
       {
         _id: expect.any(String),
-        deployedAt: new Date(2020, 3, 15).toJSON(),
+        deployedAt: new Date(2020, 7, 10, 22, 54, 12).toJSON(),
         templateName: 'Natural One',
         url: 'https://naturalone.heroku.com/apps/mern-ejam-task',
         version: '2.0.0',
