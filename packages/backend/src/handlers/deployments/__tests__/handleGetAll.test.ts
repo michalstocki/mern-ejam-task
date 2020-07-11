@@ -24,7 +24,7 @@ describe('handleGetAll', () => {
       },
       {
         _id: expect.any(String),
-        deployedAt: new Date(2020, 7, 10, 22, 54, 12).toJSON(),
+        deployedAt: new Date(2020, 3, 15, 22, 34, 12).toJSON(),
         templateName: 'Natural One',
         url: 'https://naturalone.heroku.com/apps/mern-ejam-task',
         version: '2.0.0',
