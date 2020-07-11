@@ -1,4 +1,4 @@
-import { DeploymentJSON } from 'mern-ejam-task-backend/src/types/deployments/Deployment';
+import { DeploymentJSON } from '../../types/deployments/Deployment';
 import { loadMongoFixtures } from 'mern-ejam-task-backend/testUtils/loadMongoFixtures';
 import * as mongoose from 'mongoose';
 import { deploymentsCollection } from '../../backend/src/handlers/deployments/__tests__/__fixtures__/deploymentsCollection';

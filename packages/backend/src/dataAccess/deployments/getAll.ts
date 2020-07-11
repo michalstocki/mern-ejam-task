@@ -1,5 +1,5 @@
 import { Document, Model } from 'mongoose';
-import { DeploymentJSON } from '../../types/deployments/Deployment';
+import { DeploymentJSON } from '../../../../types/deployments/Deployment';
 import { getDeploymentModel } from './getDeploymentModel';
 
 export async function getAll(): Promise<DeploymentJSON[]> {

@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { Deployment } from '../../types/deployments/Deployment';
+import { Deployment } from '../../../../types/deployments/Deployment';
 
 export const DeploymentSchema: Schema<Deployment> = new Schema({
   url: String,

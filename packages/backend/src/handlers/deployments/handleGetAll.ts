@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getAll } from '../../dataAccess/deployments/getAll';
-import { Deployment } from '../../types/deployments/Deployment';
+import { Deployment } from '../../../../types/deployments/Deployment';
 
 export async function handleGetAll(
   request: Request,

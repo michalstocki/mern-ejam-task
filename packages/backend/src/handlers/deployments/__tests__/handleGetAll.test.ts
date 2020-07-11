@@ -1,6 +1,6 @@
 import request from 'supertest';
 import { createTestEnv } from '../../../../testUtils/createTestEnv';
-import { DeploymentJSON } from '../../../types/deployments/Deployment';
+import { DeploymentJSON } from '../../../../../types/deployments/Deployment';
 import { deploymentsCollection } from './__fixtures__/deploymentsCollection';
 
 describe('handleGetAll', () => {
