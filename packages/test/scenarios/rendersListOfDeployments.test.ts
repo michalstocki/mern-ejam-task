@@ -43,7 +43,7 @@ describe('rendersListOfDeployments', () => {
         version: '1.0.0',
       },
       {
-        deployedAt: new Date(2020, 7, 10, 22, 54, 12).toLocaleString(),
+        deployedAt: new Date(2020, 3, 15, 22, 34, 12).toLocaleString(),
         templateName: 'Natural One',
         url: 'https://naturalone.heroku.com/apps/mern-ejam-task',
         version: '2.0.0',
@@ -53,7 +53,7 @@ describe('rendersListOfDeployments', () => {
     return Promise.all(
       expectedDeployments.map(async (expected, index) => {
         const renderedInfo: DeploymentJSON = await page().$eval(
-          `.App .deployments__item:nth-child(${index})`,
+          `.App .deployments__item:nth-child(${index + 1})`,
           (el) => {
             return {
               deployedAt: el.querySelector('.deployments__time')!.innerHTML,

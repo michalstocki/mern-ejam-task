@@ -1,11 +1,17 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { State } from '../../redux/store';
+import { DeploymentItem } from './DeploymentItem';
 
 export function DeploymentsList() {
   const deployments = useSelector(getAllDeployments);
-  console.log(deployments);
-  return <div>{deployments.length}</div>;
+  return (
+    <ul className="deployments">
+      {deployments.map((deployment) => {
+        return <DeploymentItem {...deployment} key={deployment._id} />;
+      })}
+    </ul>
+  );
 }
 
 function getAllDeployments(state: State) {
