@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { App } from './App';
 import './index.css';
 import { loadDeployments } from './redux/deployments/actions/loadDeployments';
+import { loadDeploymentTemplates } from './redux/deployments/actions/loadDeploymentTemplates';
 import { store } from './redux/store';
 
 ReactDOM.render(
@@ -13,5 +14,8 @@ ReactDOM.render(
     </Provider>
   </React.StrictMode>,
   document.getElementById('main-container'),
-  () => store.dispatch(loadDeployments())
+  () => {
+    store.dispatch(loadDeployments());
+    store.dispatch(loadDeploymentTemplates());
+  }
 );

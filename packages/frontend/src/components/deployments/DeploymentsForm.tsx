@@ -20,7 +20,7 @@ export function DeploymentsForm() {
   );
 
   const onInputChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
+    (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       const name = e.target.name as keyof DeploymentBase;
       const value = e.target.value;
       dispatch(updateDeploymentForm(name, value));
@@ -32,12 +32,17 @@ export function DeploymentsForm() {
     <form onSubmit={onSubmit} className="deployments-form">
       <label>
         <div>Template name</div>
-        <input
-          type="text"
+        <select
           value={formState.templateName.value}
           name="templateName"
           onChange={onInputChange}
-        />
+        >
+          {formState.templateName.availableValues.map((value) => (
+            <option value={value} key={value}>
+              {value}
+            </option>
+          ))}
+        </select>
       </label>
       <label>
         <div>Version</div>

@@ -1,21 +1,14 @@
-import { ThunkAction } from 'redux-thunk';
 import {
   DeploymentBase,
   DeploymentJSON,
 } from '../../../../../types/deployments/Deployment';
 import { checkStatus } from '../../../common/fetch/checkStatus';
-import { State } from '../../store';
+import { AppThunk } from '../../store';
 import { DeploymentsState } from '../reducers/deployments';
 import { addDeployment } from './addDeployment';
-import { AnyDeploymentsAction } from './AnyDeploymentsAction';
 import { emptyDeploymentsForm } from './emptyDeploymentsForm';
 
-export function submitDeploymentForm(): ThunkAction<
-  void,
-  State,
-  unknown,
-  AnyDeploymentsAction
-> {
+export function submitDeploymentForm(): AppThunk {
   return async (dispatch, getState) => {
     const { deployments } = getState();
     const response = await fetch('/deployments', {

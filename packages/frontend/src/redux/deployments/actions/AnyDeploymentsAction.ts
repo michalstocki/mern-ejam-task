@@ -2,6 +2,7 @@ import { AddDeploymentAction } from './addDeployment';
 import { EmptyDeploymentsFormAction } from './emptyDeploymentsForm';
 import { LoadDeploymentsAction } from './loadDeployments';
 import { RemoveDeploymentAction } from './removeDeployment';
+import { SetDeploymentTemplatesAction } from './setDeploymentTemplates';
 import { UpdateDeploymentFormAction } from './updateDeploymentForm';
 
 export type DeploymentsActionTypes = keyof DeploymentsActionTypeToAction;
@@ -13,4 +14,5 @@ export interface DeploymentsActionTypeToAction {
   UpdateDeploymentForm: UpdateDeploymentFormAction;
   EmptyDeploymentsForm: EmptyDeploymentsFormAction;
   RemoveDeployment: RemoveDeploymentAction;
+  SetDeploymentTemplates: SetDeploymentTemplatesAction;
 }

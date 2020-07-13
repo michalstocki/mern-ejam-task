@@ -1,12 +1,8 @@
-import { ThunkAction } from 'redux-thunk';
 import { checkStatus } from '../../../common/fetch/checkStatus';
-import { State } from '../../store';
-import { AnyDeploymentsAction } from './AnyDeploymentsAction';
+import { AppThunk } from '../../store';
 import { removeDeployment } from './removeDeployment';
 
-export function deleteDeployment(
-  id: string
-): ThunkAction<void, State, unknown, AnyDeploymentsAction> {
+export function deleteDeployment(id: string): AppThunk {
   return async (dispatch) => {
     const response = await fetch(`/deployments/${id}`, { method: 'DELETE' });
 

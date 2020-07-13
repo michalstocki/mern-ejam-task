@@ -2,6 +2,7 @@ import {
   DeploymentBase,
   DeploymentJSON,
 } from '../../../../../types/deployments/Deployment';
+import { DeploymentTemplate } from '../../../../../types/deployments/DeploymentTemplate';
 import {
   DeploymentsActionTypes,
   DeploymentsActionTypeToAction,
@@ -10,12 +11,14 @@ import { handleAddDeployment } from './actionHandlers/handleAddDeployment';
 import { handleEmptyDeploymentsForm } from './actionHandlers/handleEmptyDeploymentsForm';
 import { handleLoadDeployments } from './actionHandlers/handleLoadDeployments';
 import { handleRemoveDeployment } from './actionHandlers/handleRemoveDeployment';
+import { handleSetDeploymentTemplates } from './actionHandlers/handleSetDeploymentTemplates';
 import { handleUpdateDeploymentForm } from './actionHandlers/handleUpdateDeploymentForm';
 
 export interface DeploymentsState {
   allIds: string[];
   byId: DeploymentsById;
   formFields: DeploymentsFormState;
+  templates: TemplatesState;
 }
 
 export interface DeploymentsById {
@@ -28,16 +31,31 @@ export type DeploymentsFormState = {
 
 export interface FormFieldState<N extends keyof DeploymentBase> {
   value: DeploymentBase[N];
+  availableValues: string[];
 }
+
+export type TemplatesState = {
+  [name: string]: DeploymentTemplate;
+};
 
 export const initialDeploymentsState: DeploymentsState = {
   allIds: [],
   byId: {},
   formFields: {
-    templateName: { value: '' },
-    url: { value: '' },
-    version: { value: '' },
+    templateName: {
+      availableValues: [],
+      value: '',
+    },
+    url: {
+      availableValues: [],
+      value: '',
+    },
+    version: {
+      availableValues: [],
+      value: '',
+    },
   },
+  templates: {},
 };
 
 type ActionHandler<T extends DeploymentsActionTypes> = (
@@ -51,6 +69,7 @@ const actionHandlers: { [T in DeploymentsActionTypes]: ActionHandler<T> } = {
   LoadDeployments: handleLoadDeployments,
   UpdateDeploymentForm: handleUpdateDeploymentForm,
   RemoveDeployment: handleRemoveDeployment,
+  SetDeploymentTemplates: handleSetDeploymentTemplates,
 };
 
 export function deployments<T extends DeploymentsActionTypes>(
