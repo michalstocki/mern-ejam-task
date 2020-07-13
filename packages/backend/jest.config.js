@@ -7,4 +7,5 @@ module.exports = {
   testMatch: ['**/__tests__/**/*.test.ts'],
   testEnvironment: 'node',
   forceExit: true,
+  setupFilesAfterEnv: ['jest-extended'],
 };

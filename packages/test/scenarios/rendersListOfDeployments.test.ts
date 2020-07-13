@@ -1,14 +1,16 @@
-import { DeploymentJSON } from '../../types/deployments/Deployment';
+import { connectMongo } from 'mern-ejam-task-backend/src/dataAccess/connectMongo';
 import { loadMongoFixtures } from 'mern-ejam-task-backend/testUtils/loadMongoFixtures';
 import * as mongoose from 'mongoose';
 import { deploymentsCollection } from '../../backend/src/handlers/deployments/__tests__/__fixtures__/deploymentsCollection';
+import { DeploymentJSON } from '../../types/deployments/Deployment';
 import { e2eTestAppConfig } from '../config';
 import { openApp } from '../utils/openApp';
 
 describe('rendersListOfDeployments', () => {
   beforeAll(async () => {
     // temporary – until there's no addition form + endpoint
-    await loadMongoFixtures(e2eTestAppConfig, deploymentsCollection);
+    await connectMongo(e2eTestAppConfig);
+    await loadMongoFixtures(deploymentsCollection);
   });
 
   afterAll(async () => {

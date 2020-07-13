@@ -1,3 +1,4 @@
+import { OK } from 'http-status-codes';
 import request from 'supertest';
 import { createTestEnv } from '../../../../testUtils/createTestEnv';
 import { DeploymentJSON } from '../../../../../types/deployments/Deployment';
@@ -10,14 +11,14 @@ describe('handleGetAll', () => {
     const expectedDeploys: DeploymentJSON[] = [
       {
         _id: expect.any(String),
-        deployedAt: new Date(2020, 7, 10, 22, 54, 12).toJSON(),
+        deployedAt: new Date(2020, 6, 10, 22, 54, 12).toJSON(),
         templateName: 'Techno 01',
         url: 'https://techno01.heroku.com/apps/mern-ejam-task',
         version: '1.1.1',
       },
       {
         _id: expect.any(String),
-        deployedAt: new Date(2020, 7, 9, 22, 44, 12).toJSON(),
+        deployedAt: new Date(2020, 6, 9, 22, 44, 12).toJSON(),
         templateName: 'Techno 01',
         url: 'https://techno01.heroku.com/apps/mern-ejam-task',
         version: '1.0.0',
@@ -34,7 +35,7 @@ describe('handleGetAll', () => {
     await request(app())
       .get('/deployments')
       .expect('Content-Type', /json/)
-      .expect(200)
+      .expect(OK)
       .expect((resp) => {
         expect(resp.body).toEqual(expectedDeploys);
       });

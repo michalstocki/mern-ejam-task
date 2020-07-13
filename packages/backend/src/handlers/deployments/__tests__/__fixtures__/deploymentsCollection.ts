@@ -18,7 +18,7 @@ export const deploymentsCollection: Array<MongoFixture<Deployment>> = [
   },
   {
     data: {
-      deployedAt: new Date(2020, 7, 9, 22, 44, 12),
+      deployedAt: new Date(2020, 6, 9, 22, 44, 12),
       templateName: 'Techno 01',
       url: 'https://techno01.heroku.com/apps/mern-ejam-task',
       version: '1.0.0',
@@ -28,7 +28,7 @@ export const deploymentsCollection: Array<MongoFixture<Deployment>> = [
   },
   {
     data: {
-      deployedAt: new Date(2020, 7, 10, 22, 54, 12),
+      deployedAt: new Date(2020, 6, 10, 22, 54, 12),
       templateName: 'Techno 01',
       url: 'https://techno01.heroku.com/apps/mern-ejam-task',
       version: '1.1.1',

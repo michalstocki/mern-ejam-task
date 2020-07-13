@@ -3,6 +3,7 @@ import { Server } from 'http';
 import mongoose, { Schema } from 'mongoose';
 import { Config } from '../config';
 import { createServer } from '../src/createServer';
+import { connectMongo } from '../src/dataAccess/connectMongo';
 import { closeServer } from './closeServer';
 import { getJestWorkerId } from './getJestWorkerId';
 import { loadMongoFixtures } from './loadMongoFixtures';
@@ -21,9 +22,9 @@ export function createTestEnv(
     mongoURI: `mongodb://localhost:27017/${dbName}`,
   };
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     try {
-      await loadMongoFixtures(config, fixtures);
+      await connectMongo(config);
       app = await createServer(config);
       server = app.listen(config.port);
     } catch (e) {
@@ -31,17 +32,36 @@ export function createTestEnv(
     }
   });
 
+  beforeEach(async () => {
+    try {
+      await loadMongoFixtures(fixtures);
+    } catch (e) {
+      console.error(e);
+    }
+  });
+
   afterEach(async () => {
     await mongoose.connection.dropDatabase();
-    await mongoose.disconnect();
+  });
+
+  afterAll(async () => {
     await closeServer(server);
+    await mongoose.disconnect();
   });
 
   return {
     app: () => app,
-    async getCollection<T>(name: string, schema: Schema<T>): Promise<T[]> {
-      const docs = await mongoose.model(name, schema).find().exec();
-      return docs.map((d) => d.toObject());
+    async getCollection<T>(
+      name: string,
+      schema: Schema<T>,
+      sortBy: SortArg
+    ): Promise<T[]> {
+      const docs = await mongoose
+        .model(name, schema)
+        .find()
+        .sort(sortBy)
+        .exec();
+      return docs.map((d) => d.toObject({ versionKey: false }));
     },
   };
 }
@@ -49,5 +69,11 @@ export function createTestEnv(
 export interface BackendTestEnv {
   app(): Express;
 
-  getCollection<T>(name: string, schema: Schema<T>): Promise<T[]>;
+  getCollection<T>(
+    name: string,
+    schema: Schema<T>,
+    sortBy: SortArg
+  ): Promise<T[]>;
 }
+
+type SortArg = { [property: string]: 'asc' | 'desc' };

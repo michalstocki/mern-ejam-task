@@ -1,4 +1,4 @@
-interface DeploymentBase {
+export interface DeploymentBase {
   url: string;
   templateName: string;
   version: string;
@@ -6,6 +6,7 @@ interface DeploymentBase {
 
 export interface Deployment extends DeploymentBase {
   deployedAt: Date;
+  _id?: string;
 }
 
 export interface DeploymentJSON extends DeploymentBase {
