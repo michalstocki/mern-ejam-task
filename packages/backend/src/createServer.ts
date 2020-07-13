@@ -3,6 +3,7 @@ import path from 'path';
 import { Config } from '../config';
 import { connectMongo } from './dataAccess/connectMongo';
 import { handleCreate } from './handlers/deployments/handleCreate';
+import { handleDelete } from './handlers/deployments/handleDelete';
 import { handleGetAll } from './handlers/deployments/handleGetAll';
 
 export async function createServer(config: Config): Promise<Express> {
@@ -12,5 +13,6 @@ export async function createServer(config: Config): Promise<Express> {
     .use(express.static(path.join(__dirname, '..', '..', 'frontend', 'build')))
     .use(express.json())
     .get('/deployments', handleGetAll)
-    .post('/deployments', handleCreate);
+    .post('/deployments', handleCreate)
+    .delete('/deployments/:id', handleDelete);
 }
