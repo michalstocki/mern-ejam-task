@@ -19,7 +19,7 @@ describe('rendersListOfDeployments', () => {
     await mongoose.connection.close();
   });
 
-  const { page } = openApp();
+  const { page, deployment } = openApp();
 
   it('displays list of the 3 deployments from database', async () => {
     const childrenCount: number = await page().$eval(
@@ -33,13 +33,13 @@ describe('rendersListOfDeployments', () => {
   it('each Deployment item contains name, version, url and date', () => {
     const expectedDeployments: DeploymentJSON[] = [
       {
-        deployedAt: new Date(2020, 7, 10, 22, 54, 12).toLocaleString(),
+        deployedAt: new Date(2020, 6, 10, 22, 54, 12).toLocaleString(),
         templateName: 'Techno 01',
         url: 'https://techno01.heroku.com/apps/mern-ejam-task',
         version: '1.1.1',
       },
       {
-        deployedAt: new Date(2020, 7, 9, 22, 44, 12).toLocaleString(),
+        deployedAt: new Date(2020, 6, 9, 22, 44, 12).toLocaleString(),
         templateName: 'Techno 01',
         url: 'https://techno01.heroku.com/apps/mern-ejam-task',
         version: '1.0.0',
@@ -54,17 +54,7 @@ describe('rendersListOfDeployments', () => {
 
     return Promise.all(
       expectedDeployments.map(async (expected, index) => {
-        const renderedInfo: DeploymentJSON = await page().$eval(
-          `.App .deployments__item:nth-child(${index + 1})`,
-          (el) => {
-            return {
-              deployedAt: el.querySelector('.deployments__time')!.innerHTML,
-              templateName: el.querySelector('.deployments__name')!.innerHTML,
-              url: el.querySelector('.deployments__url')!.innerHTML,
-              version: el.querySelector('.deployments__version')!.innerHTML,
-            };
-          }
-        );
+        const renderedInfo = await deployment(index).scrapData();
 
         expect(renderedInfo).toEqual(expected);
       })
