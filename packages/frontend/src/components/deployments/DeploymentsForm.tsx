@@ -46,12 +46,17 @@ export function DeploymentsForm() {
       </label>
       <label>
         <div>Version</div>
-        <input
-          type="text"
+        <select
           value={formState.version.value}
           name="version"
           onChange={onInputChange}
-        />
+        >
+          {formState.version.availableValues.map((value) => (
+            <option value={value} key={value}>
+              {value}
+            </option>
+          ))}
+        </select>
       </label>
       <label>
         <div>URL</div>

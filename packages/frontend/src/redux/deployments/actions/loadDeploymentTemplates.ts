@@ -1,6 +1,7 @@
 import { DeploymentTemplate } from '../../../../../types/deployments/DeploymentTemplate';
 import { checkStatus } from '../../../common/fetch/checkStatus';
 import { AppThunk } from '../../store';
+import { emptyDeploymentsForm } from './emptyDeploymentsForm';
 import { setDeploymentTemplates } from './setDeploymentTemplates';
 
 export function loadDeploymentTemplates(): AppThunk {
@@ -10,5 +11,6 @@ export function loadDeploymentTemplates(): AppThunk {
     const templates: DeploymentTemplate[] = await response.json();
 
     dispatch(setDeploymentTemplates(templates));
+    dispatch(emptyDeploymentsForm());
   };
 }
