@@ -9,6 +9,7 @@ import {
 import { handleAddDeployment } from './actionHandlers/handleAddDeployment';
 import { handleEmptyDeploymentsForm } from './actionHandlers/handleEmptyDeploymentsForm';
 import { handleLoadDeployments } from './actionHandlers/handleLoadDeployments';
+import { handleRemoveDeployment } from './actionHandlers/handleRemoveDeployment';
 import { handleUpdateDeploymentForm } from './actionHandlers/handleUpdateDeploymentForm';
 
 export interface DeploymentsState {
@@ -49,6 +50,7 @@ const actionHandlers: { [T in DeploymentsActionTypes]: ActionHandler<T> } = {
   EmptyDeploymentsForm: handleEmptyDeploymentsForm,
   LoadDeployments: handleLoadDeployments,
   UpdateDeploymentForm: handleUpdateDeploymentForm,
+  RemoveDeployment: handleRemoveDeployment,
 };
 
 export function deployments<T extends DeploymentsActionTypes>(

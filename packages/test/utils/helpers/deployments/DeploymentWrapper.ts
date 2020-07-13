@@ -17,4 +17,12 @@ export class DeploymentWrapper {
       }
     );
   }
+
+  public async delete() {
+    return this.page.click(
+      `.App .deployments__item:nth-child(${
+        this.index + 1
+      }) .deployments__delete`
+    );
+  }
 }

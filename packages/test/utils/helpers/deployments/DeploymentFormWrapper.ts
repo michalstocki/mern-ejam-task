@@ -40,4 +40,12 @@ export class DeploymentFormWrapper {
       res.url().endsWith('/deployments')
     );
   }
+
+  public async addMany(deployments: DeploymentBase[]): Promise<void> {
+    for (let i = 0; i < deployments.length; i++) {
+      const deployment = deployments[i];
+      await this.fillWithData(deployment);
+      await this.submit();
+    }
+  }
 }
