@@ -1,7 +1,8 @@
 import 'jest-extended';
 import { Deployment, DeploymentJSON } from '../../types/deployments/Deployment';
-import { APP_READY_SELECTOR } from '../utils/launchBrowser';
 import { openApp } from '../utils/openApp';
+
+const APP_READY_SELECTOR: string = '.App .deployments__item';
 
 describe('addsNewDeploymentByForm', () => {
   const { page, deploymentForm, deployment } = openApp();
