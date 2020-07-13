@@ -1,5 +1,5 @@
 import { LoadDeploymentsAction } from '../../../actions/loadDeployments';
-import { DeploymentsState } from '../../deployments';
+import { DeploymentsState, initialDeploymentsState } from '../../deployments';
 import { handleLoadDeployments } from '../handleLoadDeployments';
 
 describe('handleLoadDeployments', () => {
@@ -32,11 +32,13 @@ describe('handleLoadDeployments', () => {
     };
 
     const initialState: DeploymentsState = {
+      ...initialDeploymentsState,
       allIds: [],
       byId: {},
     };
 
     const expectedState: DeploymentsState = {
+      ...initialDeploymentsState,
       allIds: ['first-id', 'second-id', 'third-id'],
       byId: {
         'first-id': {
@@ -81,6 +83,7 @@ describe('handleLoadDeployments', () => {
     };
 
     const initialState: DeploymentsState = {
+      ...initialDeploymentsState,
       allIds: [],
       byId: {},
     };

@@ -13,6 +13,7 @@ export function handleLoadDeployments(
       return resultingState;
     },
     {
+      ...state,
       allIds: [],
       byId: {},
     }

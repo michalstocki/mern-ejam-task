@@ -1,23 +1,41 @@
-import { DeploymentJSON } from '../../../../../types/deployments/Deployment';
 import {
-  AnyDeploymentsAction,
+  DeploymentBase,
+  DeploymentJSON,
+} from '../../../../../types/deployments/Deployment';
+import {
   DeploymentsActionTypes,
   DeploymentsActionTypeToAction,
 } from '../actions/AnyDeploymentsAction';
+import { handleSubmitDeploymentForm } from './actionHandlers/handleSubmitDeploymentForm';
 import { handleLoadDeployments } from './actionHandlers/handleLoadDeployments';
+import { handleUpdateDeploymentForm } from './actionHandlers/handleUpdateDeploymentForm';
 
 export interface DeploymentsState {
   allIds: string[];
   byId: DeploymentsById;
+  formFields: DeploymentsFormState;
 }
 
 export interface DeploymentsById {
   [id: string]: DeploymentJSON;
 }
 
-const initialState: DeploymentsState = {
+export type DeploymentsFormState = {
+  [N in keyof DeploymentBase]: FormFieldState<N>;
+};
+
+export interface FormFieldState<N extends keyof DeploymentBase> {
+  value: DeploymentBase[N];
+}
+
+export const initialDeploymentsState: DeploymentsState = {
   allIds: [],
   byId: {},
+  formFields: {
+    templateName: { value: '' },
+    url: { value: '' },
+    version: { value: '' },
+  },
 };
 
 type ActionHandler<T extends DeploymentsActionTypes> = (
@@ -26,15 +44,17 @@ type ActionHandler<T extends DeploymentsActionTypes> = (
 ) => DeploymentsState;
 
 const actionHandlers: { [T in DeploymentsActionTypes]: ActionHandler<T> } = {
+  SubmitDeploymentForm: handleSubmitDeploymentForm,
   LoadDeployments: handleLoadDeployments,
+  UpdateDeploymentForm: handleUpdateDeploymentForm,
 };
 
-export function deployments(
-  state = initialState,
-  action: AnyDeploymentsAction
+export function deployments<T extends DeploymentsActionTypes>(
+  state = initialDeploymentsState,
+  action: DeploymentsActionTypeToAction[T]
 ): DeploymentsState {
   if (actionHandlers[action.type]) {
-    return actionHandlers[action.type](state, action);
+    return (actionHandlers[action.type] as ActionHandler<T>)(state, action);
   }
 
   return state;
