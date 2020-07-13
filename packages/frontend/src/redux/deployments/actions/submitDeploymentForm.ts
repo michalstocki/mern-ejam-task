@@ -6,7 +6,7 @@ import {
 import { checkStatus } from '../../../common/fetch/checkStatus';
 import { State } from '../../store';
 import { DeploymentsState } from '../reducers/deployments';
-import { addDeployment, AddDeploymentAction } from './addDeployment';
+import { addDeployment } from './addDeployment';
 import { AnyDeploymentsAction } from './AnyDeploymentsAction';
 import { emptyDeploymentsForm } from './emptyDeploymentsForm';
 
