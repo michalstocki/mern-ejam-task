@@ -6,8 +6,6 @@ const URL_FIELD = '.deployments-form [name="url"]';
 const VERSION_FIELD = '.deployments-form [name="version"]';
 const SUBMIT_BUTTON = '.deployments-form [type="submit"]';
 
-const ALL_FIELDS = [TEMPLATE_NAME_FIELD, URL_FIELD, VERSION_FIELD];
-
 export class DeploymentFormWrapper {
   constructor(private page: Page) {}
 
@@ -16,22 +14,18 @@ export class DeploymentFormWrapper {
     url,
     version,
   }: DeploymentBase): Promise<void> {
-    await this.page.type(TEMPLATE_NAME_FIELD, templateName);
+    await this.page.select(TEMPLATE_NAME_FIELD, templateName);
+    await this.page.select(VERSION_FIELD, version);
     await this.page.type(URL_FIELD, url);
-    await this.page.type(VERSION_FIELD, version);
   }
 
-  public expectEmpty(): Promise<void[]> {
-    return Promise.all(
-      ALL_FIELDS.map(async (fieldSelector) => {
-        const fieldValue = await this.page.$eval(
-          fieldSelector,
-          (el) => (el as HTMLInputElement).value
-        );
-
-        expect(fieldValue).toEqual('');
-      })
+  public async expectEmpty(): Promise<void> {
+    const fieldValue = await this.page.$eval(
+      URL_FIELD,
+      (el) => (el as HTMLInputElement).value
     );
+
+    expect(fieldValue).toEqual('');
   }
 
   public async submit(): Promise<void> {
