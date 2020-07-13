@@ -29,7 +29,7 @@ export function DeploymentsForm() {
   );
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="deployments-form">
       <label>
         <div>Template name</div>
         <input

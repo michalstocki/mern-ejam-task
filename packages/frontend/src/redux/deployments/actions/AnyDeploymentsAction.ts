@@ -1,4 +1,4 @@
-import { SubmitDeploymentFormAction } from './submitDeploymentForm';
+import { AddDeploymentAction } from './addDeployment';
 import { LoadDeploymentsAction } from './loadDeployments';
 import { UpdateDeploymentFormAction } from './updateDeploymentForm';
 
@@ -7,6 +7,6 @@ export type AnyDeploymentsAction = DeploymentsActionTypeToAction[DeploymentsActi
 
 export interface DeploymentsActionTypeToAction {
   LoadDeployments: LoadDeploymentsAction;
-  SubmitDeploymentForm: SubmitDeploymentFormAction;
+  AddDeployment: AddDeploymentAction;
   UpdateDeploymentForm: UpdateDeploymentFormAction;
 }

@@ -2,7 +2,7 @@ import puppeteer, { Browser, LaunchOptions, Page } from 'puppeteer';
 import { e2eTestAppConfig } from '../config';
 
 const APP_URL: string = `http://127.0.0.1:${e2eTestAppConfig.port}`;
-const APP_READY_SELECTOR: string = '.App';
+export const APP_READY_SELECTOR: string = '.App';
 
 const defaultOptions: LaunchOptions = {
   args: ['--lang=en-US,en'],

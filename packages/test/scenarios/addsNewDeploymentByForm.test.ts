@@ -1,4 +1,6 @@
-import { Deployment } from '../../types/deployments/Deployment';
+import 'jest-extended';
+import { Deployment, DeploymentJSON } from '../../types/deployments/Deployment';
+import { APP_READY_SELECTOR } from '../utils/launchBrowser';
 import { openApp } from '../utils/openApp';
 
 describe('addsNewDeploymentByForm', () => {
@@ -6,10 +8,15 @@ describe('addsNewDeploymentByForm', () => {
 
   describe('adding a new deployments to the list', () => {
     const deploymentData: Deployment = {
-      templateName: '',
-      url: '',
+      templateName: 'Sporty',
+      url: 'http://example.com',
       deployedAt: expect.toBeValidDate(),
-      version: '',
+      version: '1.3.0',
+    };
+
+    const expectedRenderedData: DeploymentJSON = {
+      ...deploymentData,
+      deployedAt: expect.stringMatching(new Date().getFullYear().toString()),
     };
 
     beforeAll(async () => {
@@ -18,7 +25,7 @@ describe('addsNewDeploymentByForm', () => {
     });
 
     it('add the new item on top of the list', async () => {
-      expect(await deployment(0).scrapData()).toEqual(deploymentData);
+      expect(await deployment(0).scrapData()).toEqual(expectedRenderedData);
     });
 
     it('clears the form', async () => {
@@ -28,10 +35,11 @@ describe('addsNewDeploymentByForm', () => {
     describe('after refresh', () => {
       beforeAll(async () => {
         await page().reload();
+        await page().waitForSelector(APP_READY_SELECTOR);
       });
 
       it('still displays the new item', async () => {
-        expect(await deployment(0).scrapData()).toEqual(deploymentData);
+        expect(await deployment(0).scrapData()).toEqual(expectedRenderedData);
       });
     });
   });

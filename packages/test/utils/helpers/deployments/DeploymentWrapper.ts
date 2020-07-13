@@ -1,10 +1,10 @@
 import { Page } from 'puppeteer';
-import { DeploymentBase } from '../../../../types/deployments/Deployment';
+import { DeploymentJSON } from '../../../../types/deployments/Deployment';
 
 export class DeploymentWrapper {
   constructor(private page: Page, private index: number) {}
 
-  public scrapData(): Promise<DeploymentBase> {
+  public scrapData(): Promise<DeploymentJSON> {
     return this.page.$eval(
       `.App .deployments__item:nth-child(${this.index + 1})`,
       (el) => {
