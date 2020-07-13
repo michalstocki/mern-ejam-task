@@ -7,6 +7,7 @@ import {
   DeploymentsActionTypeToAction,
 } from '../actions/AnyDeploymentsAction';
 import { handleAddDeployment } from './actionHandlers/handleAddDeployment';
+import { handleEmptyDeploymentsForm } from './actionHandlers/handleEmptyDeploymentsForm';
 import { handleLoadDeployments } from './actionHandlers/handleLoadDeployments';
 import { handleUpdateDeploymentForm } from './actionHandlers/handleUpdateDeploymentForm';
 
@@ -45,6 +46,7 @@ type ActionHandler<T extends DeploymentsActionTypes> = (
 
 const actionHandlers: { [T in DeploymentsActionTypes]: ActionHandler<T> } = {
   AddDeployment: handleAddDeployment,
+  EmptyDeploymentsForm: handleEmptyDeploymentsForm,
   LoadDeployments: handleLoadDeployments,
   UpdateDeploymentForm: handleUpdateDeploymentForm,
 };

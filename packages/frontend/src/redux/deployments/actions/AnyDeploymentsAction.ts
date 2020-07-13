@@ -1,4 +1,5 @@
 import { AddDeploymentAction } from './addDeployment';
+import { EmptyDeploymentsFormAction } from './emptyDeploymentsForm';
 import { LoadDeploymentsAction } from './loadDeployments';
 import { UpdateDeploymentFormAction } from './updateDeploymentForm';
 
@@ -9,4 +10,5 @@ export interface DeploymentsActionTypeToAction {
   LoadDeployments: LoadDeploymentsAction;
   AddDeployment: AddDeploymentAction;
   UpdateDeploymentForm: UpdateDeploymentFormAction;
+  EmptyDeploymentsForm: EmptyDeploymentsFormAction;
 }

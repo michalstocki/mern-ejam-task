@@ -6,8 +6,9 @@ import {
 import { checkStatus } from '../../../common/fetch/checkStatus';
 import { State } from '../../store';
 import { DeploymentsState } from '../reducers/deployments';
-import { AddDeploymentAction } from './addDeployment';
+import { addDeployment, AddDeploymentAction } from './addDeployment';
 import { AnyDeploymentsAction } from './AnyDeploymentsAction';
+import { emptyDeploymentsForm } from './emptyDeploymentsForm';
 
 export function submitDeploymentForm(): ThunkAction<
   void,
@@ -26,12 +27,8 @@ export function submitDeploymentForm(): ThunkAction<
     checkStatus(response);
     const createdDeployment: DeploymentJSON = await response.json();
 
-    const action: AddDeploymentAction = {
-      data: createdDeployment,
-      type: 'AddDeployment',
-    };
-
-    dispatch(action);
+    dispatch(addDeployment(createdDeployment));
+    dispatch(emptyDeploymentsForm());
   };
 }
 

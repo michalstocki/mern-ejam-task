@@ -1,25 +1,40 @@
-import { connectMongo } from 'mern-ejam-task-backend/src/dataAccess/connectMongo';
-import { loadMongoFixtures } from 'mern-ejam-task-backend/testUtils/loadMongoFixtures';
-import * as mongoose from 'mongoose';
-import { deploymentsCollection } from '../../backend/src/handlers/deployments/__tests__/__fixtures__/deploymentsCollection';
-import { DeploymentJSON } from '../../types/deployments/Deployment';
-import { e2eTestAppConfig } from '../config';
+import {
+  DeploymentBase,
+  DeploymentJSON,
+} from '../../types/deployments/Deployment';
 import { openApp } from '../utils/openApp';
 
 describe('rendersListOfDeployments', () => {
+  const { page, deployment, deploymentForm } = openApp();
+
+  const deployments: DeploymentBase[] = [
+    {
+      templateName: 'Techno 01',
+      url: 'https://techno01.heroku.com/apps/mern-ejam-task',
+      version: '1.1.1',
+    },
+    {
+      templateName: 'Techno 01',
+      url: 'https://techno01.heroku.com/apps/mern-ejam-task',
+      version: '1.0.0',
+    },
+    {
+      templateName: 'Natural One',
+      url: 'https://naturalone.heroku.com/apps/mern-ejam-task',
+      version: '2.0.0',
+    },
+  ];
+
   beforeAll(async () => {
-    // temporary – until there's no addition form + endpoint
-    await connectMongo(e2eTestAppConfig);
-    await loadMongoFixtures(deploymentsCollection);
-  });
+    await deploymentForm().fillWithData(deployments[2]);
+    await deploymentForm().submit();
 
-  afterAll(async () => {
-    // temporary – until there's no addition form + endpoint
-    await mongoose.connection.dropDatabase();
-    await mongoose.connection.close();
-  });
+    await deploymentForm().fillWithData(deployments[1]);
+    await deploymentForm().submit();
 
-  const { page, deployment } = openApp();
+    await deploymentForm().fillWithData(deployments[0]);
+    await deploymentForm().submit();
+  });
 
   it('displays list of the 3 deployments from database', async () => {
     const childrenCount: number = await page().$eval(
@@ -31,21 +46,22 @@ describe('rendersListOfDeployments', () => {
   });
 
   it('each Deployment item contains name, version, url and date', () => {
+    const currentYear = new Date().getFullYear().toString();
     const expectedDeployments: DeploymentJSON[] = [
       {
-        deployedAt: new Date(2020, 6, 10, 22, 54, 12).toLocaleString(),
+        deployedAt: expect.stringMatching(currentYear),
         templateName: 'Techno 01',
         url: 'https://techno01.heroku.com/apps/mern-ejam-task',
         version: '1.1.1',
       },
       {
-        deployedAt: new Date(2020, 6, 9, 22, 44, 12).toLocaleString(),
+        deployedAt: expect.stringMatching(currentYear),
         templateName: 'Techno 01',
         url: 'https://techno01.heroku.com/apps/mern-ejam-task',
         version: '1.0.0',
       },
       {
-        deployedAt: new Date(2020, 3, 15, 22, 34, 12).toLocaleString(),
+        deployedAt: expect.stringMatching(currentYear),
         templateName: 'Natural One',
         url: 'https://naturalone.heroku.com/apps/mern-ejam-task',
         version: '2.0.0',

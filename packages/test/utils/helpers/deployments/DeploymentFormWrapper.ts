@@ -34,7 +34,10 @@ export class DeploymentFormWrapper {
     );
   }
 
-  public submit(): Promise<void> {
-    return this.page.click(SUBMIT_BUTTON);
+  public async submit(): Promise<void> {
+    await this.page.click(SUBMIT_BUTTON);
+    await this.page.waitForResponse((res) =>
+      res.url().endsWith('/deployments')
+    );
   }
 }
