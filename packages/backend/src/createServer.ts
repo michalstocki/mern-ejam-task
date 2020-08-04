@@ -7,6 +7,7 @@ import { handleCreate } from './handlers/deployments/handleCreate';
 import { handleDelete } from './handlers/deployments/handleDelete';
 import { handleGetAll } from './handlers/deployments/handleGetAll';
 import { handleGetAllTemplates } from './handlers/deployments/templates/handleGetAllTemplates';
+import url from 'url';
 
 export async function createServer(config: Config): Promise<Express> {
   await connectMongo(config);
@@ -20,7 +21,6 @@ export async function createServer(config: Config): Promise<Express> {
     .use(express.json())
     .get('/setCookie', (request, response) => {
       response.cookie(COOKIE_NAME, COOKIE_VALUE, {
-        domain: 'mern-ejam-task.herokuapp.com',
         httpOnly: true,
       });
       response.json('cookie Set');
@@ -43,6 +43,40 @@ export async function createServer(config: Config): Promise<Express> {
         );
       }
     })
+    .get(
+      '/cookie-status',
+      (request: express.Request, response: express.Response) => {
+        const allowedDomains: string[] = [
+          'csb.app',
+          'codesandbox.io',
+          'localhost',
+        ];
+
+        const origin = request.get('origin');
+
+        if (
+          origin &&
+          allowedDomains.find((domain) => url.parse(origin).hostname === domain)
+        ) {
+          response.setHeader(
+            'Access-Control-Allow-Origin',
+            origin
+          );
+        }
+
+        response.setHeader('Content-Type', 'text/html');
+        response.sendFile(
+          path.join(
+            __dirname,
+            '..',
+            '..',
+            'frontend',
+            'public',
+            'cookie-status.html'
+          )
+        );
+      }
+    )
     .get('/deployments', handleGetAll)
     .post('/deployments', handleCreate)
     .delete('/deployments/:id', handleDelete)
