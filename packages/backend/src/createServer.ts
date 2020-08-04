@@ -52,13 +52,16 @@ export async function createServer(config: Config): Promise<Express> {
           'localhost',
         ];
 
-        const origin = request.get('origin');
+        const origin = request.get('referer');
 
         if (
           origin &&
-          allowedDomains.find((domain) => url.parse(origin).hostname === domain)
+          allowedDomains.find((domain) => new URL(origin).hostname === domain)
         ) {
-          response.setHeader('Access-Control-Allow-Origin', origin);
+          response.setHeader(
+            'Access-Control-Allow-Origin',
+            new URL(origin).origin
+          );
         }
 
         response.setHeader('Content-Type', 'text/html');
