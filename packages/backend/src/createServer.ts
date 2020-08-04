@@ -58,10 +58,7 @@ export async function createServer(config: Config): Promise<Express> {
           origin &&
           allowedDomains.find((domain) => url.parse(origin).hostname === domain)
         ) {
-          response.setHeader(
-            'Access-Control-Allow-Origin',
-            origin
-          );
+          response.setHeader('Access-Control-Allow-Origin', origin);
         }
 
         response.setHeader('Content-Type', 'text/html');
