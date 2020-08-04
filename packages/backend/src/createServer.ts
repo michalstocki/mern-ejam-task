@@ -1,3 +1,4 @@
+import cookieParser from 'cookie-parser';
 import express, { Express } from 'express';
 import path from 'path';
 import { Config } from '../config';
@@ -14,6 +15,7 @@ export async function createServer(config:Config):Promise<Express> {
   let COOKIE_VALUE = 'my-value';
 
   return express()
+    .use(cookieParser())
     .use(express.static(path.join(__dirname, '..', '..', 'frontend', 'build')))
     .use(express.json())
     .get('/setCookie', (request, response) => {
@@ -31,8 +33,9 @@ export async function createServer(config:Config):Promise<Express> {
       } else {
         if (!request.cookies) {
           response.setHeader('X-My-Cookie', 'cookies object found');
+        } else {
+          response.setHeader('X-My-Cookie', 'no cookie found');
         }
-        response.setHeader('X-My-Cookie', 'no cookie found');
         response.sendFile(path.join(__dirname, '..', '..', 'frontend', 'public', 'bad.png'));
       }
     })
